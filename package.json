@@ -1,0 +1,36 @@
+{
+  "name": "nhl-api",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node build/server.js",
+    "dev": "nodemon server.ts",
+    "knex:create": "knex migrate:make ",
+    "knex:init": "knex init -x ts",
+    "knex:undo": "knex migrate:rollback",
+    "knex:down": "knex migrate:rollback --all",
+    "knex:up": "knex migrate:latest",
+    "knex:seed:make": "knex seed:make",
+    "knex:seed:run": "knex seed:run",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "knex": "^0.21.2",
+    "morgan": "~1.9.1",
+    "node-sass-middleware": "0.11.0",
+    "objection": "^2.2.2",
+    "pg": "^8.3.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.7",
+    "@types/morgan": "^1.9.1",
+    "@types/node": "^14.0.27",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.0.5",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.7"
+  }
+}
