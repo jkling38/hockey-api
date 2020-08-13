@@ -1,5 +1,5 @@
 import app from "./app";
-import dbConfig from "./config/knexfile";
+import dbConfig from "./config/database";
 import appConfig from "./config/environment";
 
 const { port, environment } = appConfig;

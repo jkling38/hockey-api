@@ -2,51 +2,45 @@ import { Model } from "objection";
 import knex from 'knex';
 
 import DbConfig from "../../config/database";
-import Conference from "./conference";
 
 const knexConnection = knex(DbConfig);
 Model.knex(knexConnection)
 
-class League extends Model {
+class Team extends Model {
     static get tableName() {
-        return 'league'
-    }
-
-    static get relationMappings() {
-        return {
-            conferences: {
-                relation: Model.HasManyRelation,
-                modelClass: Conference,
-                join: {
-                    from: "league.id",
-                    to: 'conference.league_id'
-                }
-            }
-        }
+        return 'team'
     }
 
     static get jsonSchema() {
         return {
             type: 'object',
-            required: ['name'],
+            required: ['name', 'active'],
             properties: {
                 id: {
                     type: 'integer'
                 },
                 name: {
                     type: 'string',
-                    maxLength: 50
+                    maxLength: 30
                 },
                 abbreviation: {
                     type: 'string',
                     maxLength: 5,
                 },
-                website: {
-                    type: 'string'
+                short_name: {
+                    type: 'string',
+                    maxLength: 15
+                },
+                active: {
+                    type: 'boolean'
+                },
+                external_id: {
+                    type: 'string',
+                    maxLength: 255
                 }
             }
         }
     }
 }
 
-export default League;
+export default Team;

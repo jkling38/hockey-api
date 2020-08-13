@@ -2,24 +2,24 @@ import { Model } from "objection";
 import knex from 'knex';
 
 import DbConfig from "../../config/database";
-import Conference from "./conference";
+import Division from "./division";
 
 const knexConnection = knex(DbConfig);
 Model.knex(knexConnection)
 
-class League extends Model {
+class Conference extends Model {
     static get tableName() {
-        return 'league'
+        return 'conference'
     }
 
     static get relationMappings() {
         return {
-            conferences: {
+            divisions: {
                 relation: Model.HasManyRelation,
-                modelClass: Conference,
+                modelClass: Division,
                 join: {
-                    from: "league.id",
-                    to: 'conference.league_id'
+                    from: "conference.id",
+                    to: 'division.conference_id'
                 }
             }
         }
@@ -28,25 +28,33 @@ class League extends Model {
     static get jsonSchema() {
         return {
             type: 'object',
-            required: ['name'],
+            required: ['name', 'active'],
             properties: {
                 id: {
                     type: 'integer'
                 },
                 name: {
                     type: 'string',
-                    maxLength: 50
+                    maxLength: 30
                 },
                 abbreviation: {
                     type: 'string',
                     maxLength: 5,
                 },
-                website: {
-                    type: 'string'
+                short_name: {
+                    type: 'string',
+                    maxLength: 15
+                },
+                active: {
+                    type: 'boolean'
+                },
+                external_id: {
+                    type: 'string',
+                    maxLength: 255
                 }
             }
         }
     }
 }
 
-export default League;
+export default Conference;

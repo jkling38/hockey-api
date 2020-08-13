@@ -1,7 +1,7 @@
 import * as Knex from "knex";
 
-export async function seed(knex: Knex): Promise<void> {
-  const leagueFilter = { abbreviation: "NHL" };
+export async function seed(_knex: Knex): Promise<void> {
+/*  const leagueFilter = { abbreviation: "NHL" };
   const existingLeagues = await knex("league").where(leagueFilter).select();
   if (existingLeagues.length !== 1) {
     await knex("league").where(leagueFilter).delete();
@@ -49,8 +49,10 @@ export async function seed(knex: Knex): Promise<void> {
   }
 
   // Inserts seed entries
+  */
 }
 
+/*
 async function populateLeagues(knex: Knex) {
   await knex("league").insert([
     {
@@ -199,3 +201,4 @@ async function populateNHLTeams(knex: Knex, league_id: number) {
 
   await knex("team").insert(teamsWithFranchise);
 }
+*/
