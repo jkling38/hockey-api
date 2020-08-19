@@ -1,0 +1,11 @@
+### Get drafts
+GET {{base_url}}/draft
+
+### Get draft by year
+GET {{base_url}}/draft/2020
+
+### Get prospects
+GET {{base_url}}/draft/prospects
+
+### Get prospect by id
+GET {{base_url}}/draft/prospects/72576

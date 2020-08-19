@@ -1,0 +1,5 @@
+### Get a list of awards
+GET {{base_url}}/awards
+
+### Get an award by id
+GET {{base_url}}/awards/21

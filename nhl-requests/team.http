@@ -1,0 +1,12 @@
+### Get all NHL teams.
+GET {{base_url}}/teams
+
+### Get a team by id
+GET {{base_url}}/teams/1
+
+### Get an NHL team's roster
+GET {{base_url}}/teams/1/roster
+
+### Single season stats
+GET {{base_url}}/teams/1/stats
+
