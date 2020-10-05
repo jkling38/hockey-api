@@ -5,6 +5,7 @@ export async function up(knex: Knex): Promise<void> {
     t.increments("id");
     t.string("name", 50).notNullable();
     t.string("abbreviation", 3);
+    t.string("website").nullable();
   });
 }
 

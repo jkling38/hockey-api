@@ -48,7 +48,104 @@ export async function seed(knex: Knex): Promise<void> {
     await populateNHLTeams(knex, nhlId);
   }
 
-  // Inserts seed entries
+  const existingSeasons = await knex("season").where({
+    league_id: nhlId,
+  });
+  if (existingSeasons.length !== 1) {
+    await knex("season_division_alignment")
+      .innerJoin("season", "season_division_alignment.season_id", "season.id")
+      .where("season.league_id", nhlId)
+      .select("season.id");
+
+    await knex("season_division_alignment")
+      .whereIn(
+        "season_id",
+        existingSeasons.map((s) => s.id)
+      )
+      .del();
+    await knex("season")
+      .where({
+        league_id: nhlId,
+      })
+      .del();
+
+    await knex("season").insert([
+      {
+        league_id: nhlId,
+        start_date: "10/2/2019",
+        end_date: "3/11/2020",
+      },
+    ]);
+
+    const season_id = (
+      await knex("season")
+        .where({
+          league_id: nhlId,
+        })
+        .select("season.id")
+        .first()
+    ).id;
+
+    const central = await getTeamIdsByAbbreviation(knex, [
+      "CHI",
+      "DAL",
+      "WPG",
+      "NSH",
+      "COL",
+      "STL",
+      "MIN",
+    ]);
+    const centralId = await getDivisionId(knex, "C");
+    const pacific = await getTeamIdsByAbbreviation(knex, [
+      "LAK",
+      "SJS",
+      "ANA",
+      "EDM",
+      "CGY",
+      "VAN",
+      "VGK",
+      "ARI",
+    ]);
+    const pacificId = await getDivisionId(knex, "P");
+    const metro = await getTeamIdsByAbbreviation(knex, [
+      "WSH",
+      "PHI",
+      "PIT",
+      "CAR",
+      "NYI",
+      "NJD",
+      "NYR",
+      "CBJ",
+    ]);
+    const metroId = await getDivisionId(knex, "M");
+    const atlantic = await getTeamIdsByAbbreviation(knex, [
+      "DET",
+      "BUF",
+      "OTT",
+      "TOR",
+      "MTL",
+      "BOS",
+      "TBL",
+      "FLA",
+    ]);
+    const atlanticId = await getDivisionId(knex, "A");
+
+    const season_divisions: any[] = [];
+    central.map((team_id) =>
+      season_divisions.push({ season_id, team_id, division_id: centralId })
+    );
+    pacific.map((team_id) =>
+      season_divisions.push({ season_id, team_id, division_id: pacificId })
+    );
+    metro.map((team_id) =>
+      season_divisions.push({ season_id, team_id, division_id: metroId })
+    );
+    atlantic.map((team_id) =>
+      season_divisions.push({ season_id, team_id, division_id: atlanticId })
+    );
+
+    await knex("season_division_alignment").insert(season_divisions);
+  }
 }
 
 async function populateLeagues(knex: Knex) {
@@ -514,4 +611,20 @@ async function populateNHLTeams(knex: Knex, league_id: number) {
   });
 
   await knex("team").insert(teamsWithFranchise);
+}
+async function getTeamIdsByAbbreviation(knex: Knex, abbreviations: string[]) {
+  const results = await knex("team")
+    .whereIn("abbreviation", abbreviations)
+    .select("team.id");
+  return results.map((t) => t.id);
+}
+async function getDivisionId(knex: Knex, abbreviation: string) {
+  return (
+    await knex("division")
+      .where({
+        abbreviation,
+      })
+      .select("division.id")
+      .first()
+  ).id;
 }

@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node build/server.js",
-    "dev": "nodemon server.ts",
+    "start": "node -r dotenv/config build/server.js",
+    "dev": "nodemon -r dotenv/config server.ts",
     "knex:create": "knex migrate:make ",
     "knex:init": "knex init -x ts",
     "knex:undo": "knex migrate:rollback",
@@ -17,21 +17,24 @@
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
     "express": "~4.16.1",
     "knex": "^0.21.2",
     "morgan": "~1.9.1",
     "node-sass-middleware": "0.11.0",
     "objection": "^2.2.2",
-    "pg": "^8.3.0"
+    "pg": "^8.3.0",
+    "uuid": "^8.3.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.7",
     "@types/morgan": "^1.9.1",
     "@types/node": "^14.0.27",
+    "@types/uuid": "^8.3.0",
     "nodemon": "^2.0.4",
+    "plop": "^2.7.4",
     "prettier": "^2.0.5",
     "ts-node": "^8.10.2",
-    "typescript": "^3.9.7",
-    "plop": "^2.7.4"
+    "typescript": "^3.9.7"
   }
 }
