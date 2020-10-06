@@ -3,7 +3,6 @@ import LeagueService from "../services/leagueService";
 
 const router = Router();
 
-/* GET home page. */
 router.get("/:leagueId", async function (req: Request, res: Response) {
   const { leagueId } = req.params;
 

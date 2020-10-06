@@ -2,7 +2,6 @@ import League from "../db/models/league";
 import { QueryBuilder } from "objection";
 import Team from "../db/models/team";
 import Division from "../db/models/division";
-import Season from "../db/models/season";
 
 const eagerLoad = {
   conferences: {
@@ -26,24 +25,15 @@ export const getLeague = async (
 };
 
 export const getLeagueById = async (id: number): Promise<League> => {
-  const latestSeason = (
-    await Season.query()
-      .where({
-        league_id: id,
-      })
-      .orderBy("start_date", "desc")
-      .first()
-  ).id;
-
   const result = League.query()
+    .join("season", "league.id", "season.league_id")
     .join(
-      "season_divison_alignment",
-      "league.id",
-      "season_division_alignment.league_id"
+      "current_division_alignment",
+      "season.id",
+      "current_division_alignment.season_id"
     )
     .where({
-      "league.id": id,
-      "season_division_alignment.season_id": latestSeason,
+      "current_division_alignment.league_id": id,
     })
     .first();
   return result;

@@ -22,11 +22,15 @@ class League extends Model implements ILeague {
   static get relationMappings() {
     return {
       conferences: {
-        relation: Model.HasManyRelation,
+        relation: Model.ManyToManyRelation,
         modelClass: Conference,
         join: {
           from: "league.id",
-          to: "conference.league_id",
+          through: {
+            from: "league_conference.league_id",
+            to: "league_conference.conference_id",
+          },
+          to: "conference.id",
         },
       },
     };

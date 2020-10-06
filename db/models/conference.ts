@@ -24,11 +24,15 @@ class Conference extends Model implements IConference {
   static get relationMappings() {
     return {
       divisions: {
-        relation: Model.HasManyRelation,
+        relation: Model.ManyToManyRelation,
         modelClass: Division,
         join: {
           from: "conference.id",
-          to: "division.conference_id",
+          through: {
+            from: "conference_division.conference_id",
+            to: "conference_division.division_id",
+          },
+          to: "division.id",
         },
       },
     };

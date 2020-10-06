@@ -29,8 +29,8 @@ class Division extends Model implements IDivision {
         join: {
           from: "division.id",
           through: {
-            from: "season_division_alignment.division_id",
-            to: "season_division_alignment.team_id",
+            from: "current_division_alignment.division_id",
+            to: "current_division_alignment.team_id",
           },
           to: "team.id",
         },
