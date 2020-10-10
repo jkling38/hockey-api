@@ -1,0 +1,43 @@
+GET {{base_url}}league/1
+
+###
+
+POST {{base_url}}league
+Content-Type: application/json
+
+{
+  "name": "New League",
+  "abbreviation": "NL"
+}
+
+###
+
+PUT {{base_url}}league/2
+Content-Type: application/json
+
+{
+  "name": "Updated League",
+  "abbreviation": "UL2"
+}
+
+###
+
+POST {{base_url}}league/2/season
+Content-Type: application/json
+
+{
+  "startDate": "2019-09-20"
+}
+
+###
+
+PATCH {{base_url}}league/2/season/5
+Content-Type: application/json
+
+{
+  "endDate": "2020-10-01"
+}
+
+###
+
+GET {{base_url}}league/2/season/5
