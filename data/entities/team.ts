@@ -10,4 +10,6 @@ export interface ITeam {
   franchise_id: number;
   external_id?: string;
   created_by?: Buffer;
+  deleted: boolean;
+  public: boolean;
 }

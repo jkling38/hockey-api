@@ -52,6 +52,7 @@ export const createTeam = async (team: CreateTeamRequest): Promise<Team> => {
       location_name: team.location,
       abbreviation: team.abbreviation,
       short_name: team.shortName,
+      public: team.public,
     });
   } catch (e) {
     trx.rollback();
@@ -84,6 +85,7 @@ export const updateTeam = async (
     abbreviation: updates.abbreviation
       ? updates.abbreviation
       : existing.abbreviation,
+    public: updates.public !== undefined ? updates.public : existing.public,
   };
   console.log(updated);
 

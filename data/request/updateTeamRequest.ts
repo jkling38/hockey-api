@@ -4,4 +4,5 @@ export interface UpdateTeamRequest {
   active: boolean;
   abbreviation: string;
   shortName: string;
+  public: boolean;
 }
