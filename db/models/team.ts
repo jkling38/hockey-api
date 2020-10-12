@@ -1,7 +1,7 @@
 import { Model } from "objection";
 import knex from "knex";
 
-import { ITeam } from "../../data/types";
+import { ITeam } from "../../data/entities";
 import DbConfig from "../../config/database";
 
 const knexConnection = knex(DbConfig);
@@ -48,8 +48,9 @@ class Team extends Model implements ITeam {
           type: "boolean",
         },
         external_id: {
-          type: "string",
+          type: ["string", "null"],
           maxLength: 255,
+          nullable: true,
         },
       },
     };

@@ -1,7 +1,7 @@
 import { Model } from "objection";
 import knex from "knex";
 
-import { IFranchise } from "../../data/types";
+import { IFranchise } from "../../data/entities";
 import DbConfig from "../../config/database";
 
 const knexConnection = knex(DbConfig);
@@ -11,7 +11,6 @@ class Franchise extends Model implements IFranchise {
   id?: number | undefined;
   team_name: string;
   external_id?: string | undefined;
-  league_id: number;
 
   static get tableName() {
     return "franchise";
@@ -20,7 +19,7 @@ class Franchise extends Model implements IFranchise {
   static get jsonSchema() {
     return {
       type: "object",
-      required: ["team_name", "league_id"],
+      required: ["team_name"],
       properties: {
         id: {
           type: "integer",
@@ -32,9 +31,6 @@ class Franchise extends Model implements IFranchise {
         external_id: {
           type: "string",
           maxLength: 255,
-        },
-        league_id: {
-          type: "integer",
         },
       },
     };

@@ -1,7 +1,7 @@
 import { Model } from "objection";
 import knex from "knex";
 
-import { IDivision } from "../../data/types";
+import { IDivision } from "../../data/entities";
 import DbConfig from "../../config/database";
 import Team from "./team";
 

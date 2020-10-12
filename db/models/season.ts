@@ -1,7 +1,7 @@
 import { Model } from "objection";
 import knex from "knex";
 
-import { ISeason } from "../../data/types";
+import { ISeason } from "../../data/entities";
 import DbConfig from "../../config/database";
 
 const knexConnection = knex(DbConfig);
