@@ -19,6 +19,8 @@ class Team extends Model implements ITeam {
   active: boolean;
   franchise_id: number;
   external_id?: string | undefined;
+  deleted: boolean;
+  public: boolean;
 
   static get tableName() {
     return "team";

@@ -5,4 +5,5 @@ export interface CreateTeamRequest {
   abbreviation: string;
   shortName: string;
   franchiseId?: number;
+  public: boolean;
 }

@@ -27,6 +27,7 @@ router
         shortName: Joi.string().required(),
         firstYear: Joi.number(),
         franchiseId: Joi.number(),
+        public: Joi.bool(),
       },
     }),
     async (req: Request, res: Response) => {
@@ -57,6 +58,7 @@ router
         active: Joi.bool(),
         abbreviation: Joi.string().required(),
         shortName: Joi.string().required(),
+        public: Joi.bool(),
       },
     }),
     async (req: Request, res: Response) => {
