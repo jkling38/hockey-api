@@ -1,0 +1,29 @@
+GET {{base_url}}team
+
+###
+
+POST {{base_url}}team
+Content-Type: application/json
+
+{
+  "name": "Blackhawks",
+  "location": "Chicago",
+  "firstYear": 2020,
+  "franchiseId": 2
+}
+
+###
+
+GET {{base_url}}team/2
+
+###
+
+PATCH {{base_url}}team/2
+Content-Type: application/json
+
+{
+  "name": "Smoke Daddy",
+  "location": "Chicago",
+  "abbreviation": "CSD",
+  "shortName": "The Daddy"
+}
