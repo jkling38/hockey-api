@@ -1,7 +1,7 @@
 import { Model } from "objection";
 import knex from "knex";
 
-import { ILeague } from "../../data/types";
+import { ILeague } from "../../data/entities";
 
 import DbConfig from "../../config/database";
 import Conference from "./conference";

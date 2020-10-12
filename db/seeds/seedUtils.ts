@@ -5,7 +5,7 @@ import {
   IDivision,
   ISeason,
   ISeasonDivisionAlignment,
-} from "../../data/types";
+} from "../../data/entities";
 
 export const populateLeague = async (
   knex: Knex,

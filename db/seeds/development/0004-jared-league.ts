@@ -6,7 +6,12 @@ import {
   populateLeague,
   populateSeasons,
 } from "../seedUtils";
-import { ILeague, IConference, IDivision, ISeason } from "../../../data/types";
+import {
+  ILeague,
+  IConference,
+  IDivision,
+  ISeason,
+} from "../../../data/entities";
 
 const seasons: Partial<ISeason>[] = [
   {
