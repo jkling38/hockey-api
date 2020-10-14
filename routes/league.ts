@@ -113,7 +113,6 @@ router
     res.send(season);
   })
   .patch(async (req, res) => {
-    console.log("Patching");
     const { id, seasonId } = req.params;
     const { endDate } = req.body;
 

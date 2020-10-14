@@ -4,6 +4,7 @@ import {
   createTeam,
   getTeam,
   updateTeam,
+  deleteTeam,
 } from "../services/teamService";
 import { celebrate, Joi, Segments } from "celebrate";
 import { CreateTeamRequest } from "../data/request/createTeamRequest";
@@ -14,7 +15,6 @@ const router = Router();
 router
   .route("/")
   .get(async (_req: Request, res: Response) => {
-    console.log("Getting teams");
     const teams = await getTeams();
     res.send(teams);
   })
@@ -59,6 +59,7 @@ router
         abbreviation: Joi.string().required(),
         shortName: Joi.string().required(),
         public: Joi.bool(),
+        deleted: Joi.bool(),
       },
     }),
     async (req: Request, res: Response) => {
@@ -69,6 +70,13 @@ router
 
       res.send(updated);
     }
-  );
+  )
+  .delete(async (req: Request, res: Response) => {
+    const { id } = req.params;
+
+    await deleteTeam(Number(id));
+
+    res.sendStatus(200);
+  });
 
 module.exports = router;

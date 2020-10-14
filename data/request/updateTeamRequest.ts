@@ -5,4 +5,5 @@ export interface UpdateTeamRequest {
   abbreviation: string;
   shortName: string;
   public: boolean;
+  deleted: boolean;
 }
