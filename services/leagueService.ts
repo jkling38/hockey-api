@@ -121,8 +121,6 @@ const getTeamById = async (
 
   const team = await teamQuery.execute();
 
-  console.log(team);
-
   // @ts-ignore
   return team;
 };

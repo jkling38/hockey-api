@@ -25,5 +25,11 @@ Content-Type: application/json
   "name": "Smoke Daddy",
   "location": "Chicago",
   "abbreviation": "CSD",
-  "shortName": "The Daddy"
+  "shortName": "The Daddy",
+  "public": false,
+  "deleted": false
 }
+
+###
+
+DELETE {{base_url}}team/2

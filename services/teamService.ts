@@ -70,7 +70,6 @@ export const updateTeam = async (
     throw new Error("Team not found");
   }
 
-  console.log(existing);
   const name = updates.name ? updates.name : existing.name;
   const location_name = updates.location
     ? updates.location
@@ -86,8 +85,17 @@ export const updateTeam = async (
       ? updates.abbreviation
       : existing.abbreviation,
     public: updates.public !== undefined ? updates.public : existing.public,
+    deleted: updates.deleted !== undefined ? updates.deleted : existing.deleted,
   };
-  console.log(updated);
 
   return Team.query().updateAndFetchById(id, updated);
+};
+
+export const deleteTeam = async (id: number): Promise<void> => {
+  const deleted = await Team.query().findById(id).patch({
+    deleted: true,
+  });
+  if (!deleted) {
+    throw new Error("Team not found");
+  }
 };
